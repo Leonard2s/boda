@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Boda - Liz Mary & Leonardo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Cormorant+Garamond:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f9f7f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4b9a0' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container {
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .form-container::before,
+        .form-container::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M20,50 Q40,20 60,50 Q80,80 100,50' stroke='%23d4b9a0' fill='none' stroke-width='1'/%3E%3Cpath d='M0,50 Q20,20 40,50 Q60,80 80,50' stroke='%23d4b9a0' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .form-container::before {
+            top: -50px;
+            left: -50px;
+            transform: rotate(30deg);
+        }
+        
+        .form-container::after {
+            bottom: -50px;
+            right: -50px;
+            transform: rotate(-30deg);
+        }
+        
+        .form-container h1 {
+            margin-bottom: 20px;
+            color: #7d7d7d;
+            font-size: 28px;
+            font-weight: 300;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            background: transparent;
+            color: #333;
+            transition: all 0.3s;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-bottom: 1px solid #d4b9a0;
+        }
+        
+        .btn {
+            background-color: #d4b9a0;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 185, 160, 0.4);
+        }
+        
+        .btn:hover {
+            background-color: #c0a08e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 185, 160, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .invitation {
+            display: none;
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            position: relative;
+        }
+        
+        .invitation-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 50px;
+            background-color: white;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .invitation-content {
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 30px;
+            }
+        }
+        
+        .floral-element {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            opacity: 0.15;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath d='M50,100 C50,80 80,50 100,50 C120,50 150,80 150,100 C150,120 120,150 100,150 C80,150 50,120 50,100 Z' fill='none' stroke='%23d4b9a0' stroke-width='1'/%3E%3Cpath d='M60,100 C60,85 85,60 100,60 C115,60 140,85 140,100 C140,115 115,140 100,140 C85,140 60,115 60,100 Z' fill='none' stroke='%23d4b9a0' stroke-width='1'/%3E%3Cpath d='M70,100 C70,90 90,70 100,70 C110,70 130,90 130,100 C130,110 110,130 100,130 C90,130 70,110 70,100 Z' fill='none' stroke='%23d4b9a0' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .floral-top-left {
+            top: -50px;
+            left: -50px;
+        }
+        
+        .floral-bottom-right {
+            bottom: -50px;
+            right: -50px;
+            transform: rotate(180deg);
+        }
+        
+        .invitation-left {
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .invitation-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+        
+        .invitation-text {
+            margin-bottom: 30px;
+            color: #555;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .date, .time, .location {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 18px;
+        }
+        
+        .location {
+            margin-bottom: 30px;
+        }
+        
+        .images-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            margin: 20px 0;
+        }
+        
+        .invitation-image {
+            position: absolute;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 5px;
+            transition: all 0.5s ease;
+        }
+        
+        .image-1 {
+            width: 80%;
+            height: 250px;
+            object-fit: cover;
+            top: 0;
+            left: 10%;
+            z-index: 2;
+        }
+        
+        .image-2 {
+            width: 70%;
+            height: 200px;
+            object-fit: cover;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+        
+        .image-1:hover, .image-2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            margin-top: 10px;
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            padding: 10px;
+            display: none;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+            font-size: 14px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s;
+        }
+        
+        .fade-scale {
+            animation: fadeInScale 0.8s;
+        }
+        
+        .divider {
+            width: 50px;
+            height: 1px;
+            background-color: #d4b9a0;
+            margin: 20px auto;
+        }
+        
+        .flower-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .flower-divider::before,
+        .flower-divider::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background-color: #d4b9a0;
+            opacity: 0.5;
+        }
+        
+        .flower-divider svg {
+            width: 30px;
+            height: 30px;
+            margin: 0 15px;
+            fill: #d4b9a0;
+            opacity: 0.7;
+        }
+        
+        /* Efectos de animación para el formulario */
+        .input-focus-effect {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4b9a0;
+            transition: all 0.4s;
+        }
+        
+        .input-group input:focus ~ .input-focus-effect {
+            width: 100%;
+        }
+        
+        .floating-petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .petal {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='25' viewBox='0 0 50 25'%3E%3Cpath d='M25,0 C35,8 50,10 50,25 C50,10 35,8 25,0 C15,8 0,10 0,25 C0,10 15,8 25,0 Z' fill='%23d4b9a0' fill-opacity='0.5'/%3E%3C/svg%3E");
+            animation-name: floating;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            25% { opacity: 0.6; }
+            75% { opacity: 0.6; }
+            100% { transform: translate(100px, 100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .invitation-content {
+                padding: 30px;
+            }
+            
+            .names {
+                font-size: 36px;
+            }
+            
+            .invitation-text, .date, .time, .location {
+                font-size: 16px;
+            }
+            
+            .images-container {
+                height: 320px;
+            }
+            
+            .image-1 {
+                height: 200px;
+            }
+            
+            .image-2 {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-container animate__animated animate__fadeIn">
+        <h1>Verificación de Invitado</h1>
+        <div class="input-group">
+            <input type="text" id="name-input" placeholder="Ingresa tu nombre completo">
+            <span class="input-focus-effect"></span>
+        </div>
+        <button class="btn" id="verify-btn">Verificar Invitación</button>
+        <p class="error-message" id="error-message">Lo sentimos, tu nombre no se encuentra en la lista de invitados.</p>
+    </div>
+    
+    <div class="invitation" id="invitation">
+        <div class="invitation-content">
+            <div class="floral-element floral-top-left"></div>
+            <div class="floral-element floral-bottom-right"></div>
+            
+            <div class="invitation-left">
+                <h1 class="names slide-up">Liz Mary Familia<br>&<br>Leonardo Flores</h1>
+                
+                <div class="flower-divider">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,8c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4S14.21,8,12,8z M12,14c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,14,12,14z"/>
+                        <path d="M16.05,2.65c-2.98,0-5.4,2.42-5.4,5.4c0-2.98-2.42-5.4-5.4-5.4s-5.4,2.42-5.4,5.4s2.42,5.4,5.4,5.4c-2.98,0-5.4,2.42-5.4,5.4s2.42,5.4,5.4,5.4s5.4-2.42,5.4-5.4c0,2.98,2.42,5.4,5.4,5.4s5.4-2.42,5.4-5.4s-2.42-5.4-5.4-5.4c2.98,0,5.4-2.42,5.4-5.4S19.03,2.65,16.05,2.65z M12,16.16c-0.58,0.59-1.16,1.16-1.73,1.73c-0.58-0.57-1.15-1.15-1.73-1.73C9.11,15.58,9.68,15,10.26,14.43C10.84,15.01,11.42,15.58,12,16.16z M10.26,9.57C9.68,9,9.11,8.42,8.53,7.84c0.58-0.58,1.15-1.15,1.73-1.73C10.84,6.69,11.42,7.27,12,7.84C11.42,8.42,10.84,9,10.26,9.57z M12,12c-0.55,0-1-0.45-1-1s0.45-1,1-1s1,0.45,1,1S12.55,12,12,12z M13.74,14.43c0.58,0.57,1.15,1.15,1.73,1.73c-0.58,0.58-1.15,1.16-1.73,1.73C13.16,17.32,12.58,16.74,12,16.16C12.58,15.58,13.16,15.01,13.74,14.43z M13.74,9.57C13.16,9,12.58,8.42,12,7.84c0.58-0.57,1.16-1.15,1.74-1.73c0.58,0.58,1.15,1.15,1.73,1.73C14.89,8.42,14.32,9,13.74,9.57z"/>
+                    </svg>
+                </div>
+                
+                <p class="invitation-text fade-in">Solicito el honor de su presencia<br>mientras intercambian votos y celebran su matrimonio</p>
+                
+                <p class="date slide-up">Domingo 7 de Mayo 2025</p>
+                <p class="time slide-up">04:00 PM - 10:00 PM</p>
+                <p class="location slide-up">Hotel Emotion by Hodelpa Juan Dolio</p>
+                
+                <div class="flower-divider">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,8c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4S14.21,8,12,8z M12,14c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,14,12,14z"/>
+                        <path d="M16.05,2.65c-2.98,0-5.4,2.42-5.4,5.4c0-2.98-2.42-5.4-5.4-5.4s-5.4,2.42-5.4,5.4s2.42,5.4,5.4,5.4c-2.98,0-5.4,2.42-5.4,5.4s2.42,5.4,5.4,5.4s5.4-2.42,5.4-5.4c0,2.98,2.42,5.4,5.4,5.4s5.4-2.42,5.4-5.4s-2.42-5.4-5.4-5.4c2.98,0,5.4-2.42,5.4-5.4S19.03,2.65,16.05,2.65z M12,16.16c-0.58,0.59-1.16,1.16-1.73,1.73c-0.58-0.57-1.15-1.15-1.73-1.73C9.11,15.58,9.68,15,10.26,14.43C10.84,15.01,11.42,15.58,12,16.16z M10.26,9.57C9.68,9,9.11,8.42,8.53,7.84c0.58-0.58,1.15-1.15,1.73-1.73C10.84,6.69,11.42,7.27,12,7.84C11.42,8.42,10.84,9,10.26,9.57z M12,12c-0.55,0-1-0.45-1-1s0.45-1,1-1s1,0.45,1,1S12.55,12,12,12z M13.74,14.43c0.58,0.57,1.15,1.15,1.73,1.73c-0.58,0.58-1.15,1.16-1.73,1.73C13.16,17.32,12.58,16.74,12,16.16C12.58,15.58,13.16,15.01,13.74,14.43z M13.74,9.57C13.16,9,12.58,8.42,12,7.84c0.58-0.57,1.16-1.15,1.74-1.73c0.58,0.58,1.15,1.15,1.73,1.73C14.89,8.42,14.32,9,13.74,9.57z"/>
+                    </svg>
+                </div>
+                
+                <p class="footer fade-in">Eventos con altura</p>
+                <p class="footer fade-in">Por favor responder antes del 7 de Abril del 2024</p>
+                <p class="footer fade-in">eventosconaltura@gmail.com</p>
+            </div>
+            
+            <div class="invitation-right">
+                <div class="images-container fade-scale">
+                    <img src="/api/placeholder/400/320" alt="Pareja de novios" class="invitation-image image-1">
+                    <img src="/api/placeholder/400/320" alt="Manos formando un corazón" class="invitation-image image-2">
+                </div>
+            </div>
+        </div>
+        
+        <div class="floating-petals" id="floating-petals"></div>
+    </div>
+    
+    <script>
+        // Lista de invitados (normalmente esto vendría de una base de datos)
+        const guestList = [
+            "Ana García",
+            "Carlos Rodríguez",
+            "María López",
+            "Juan Pérez",
+            "Sofía Martínez",
+            "Pedro González",
+            "Laura Díaz",
+            "Miguel Fernández",
+            "Carmen Sánchez",
+            "José Ramírez",
+            "Luisa Torres",
+            "Francisco Vargas",
+            "Gabriela Jiménez",
+            "Roberto Morales",
+            "Patricia Herrera",
+            "test" // Para pruebas fáciles
+        ];
+        
+        // Elementos del DOM
+        const nameInput = document.getElementById('name-input');
+        const verifyBtn = document.getElementById('verify-btn');
+        const errorMessage = document.getElementById('error-message');
+        const invitation = document.getElementById('invitation');
+        const formContainer = document.querySelector('.form-container');
+        const floatingPetals = document.getElementById('floating-petals');
+        
+        // Crear pétalos flotantes para efectos decorativos
+        function createPetals() {
+            for (let i = 0; i < 15; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 30 + 20;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size/2}px`;
+                
+                // Posición inicial aleatoria
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.top = `${Math.random() * 100}%`;
+                
+                // Duración y retraso de animación aleatorio
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                petal.style.animationDuration = `${duration}s`;
+                petal.style.animationDelay = `${delay}s`;
+                
+                // Rotación aleatoria
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                floatingPetals.appendChild(petal);
+            }
+        }
+        
+        // Función para añadir clases de animación a elementos
+        function animateElements() {
+            document.querySelectorAll('.slide-up').forEach((element, index) => {
+                element.style.animationDelay = `${0.2 + index * 0.1}s`;
+            });
+            
+            document.querySelectorAll('.fade-in').forEach((element, index) => {
+                element.style.animationDelay = `${0.5 + index * 0.1}s`;
+            });
+        }
+        
+        // Función para verificar si el nombre está en la lista de invitados
+        function verifyGuest() {
+            const name = nameInput.value.trim();
+            
+            if (name === '') {
+                showError('Por favor, ingresa tu nombre.');
+                return;
+            }
+            
+            // Verificar si el nombre está en la lista (insensible a mayúsculas/minúsculas)
+            const isInvited = guestList.some(guest => 
+                guest.toLowerCase() === name.toLowerCase()
+            );
+            
+            if (isInvited) {
+                // Animación de desvanecimiento del formulario
+                formContainer.classList.add('animate__fadeOutUp');
+                
+                setTimeout(() => {
+                    // Ocultar formulario y mostrar invitación
+                    formContainer.style.display = 'none';
+                    invitation.style.display = 'block';
+                    invitation.classList.add('animate__animated', 'animate__fadeIn');
+                    
+                    // Activar animaciones en la invitación
+                    animateElements();
+                    
+                    // Crear pétalos flotantes para efectos decorativos
+                    createPetals();
+                    
+                    // Scroll suave hacia la invitación
+                    invitation.scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+                
+                errorMessage.style.display = 'none';
+            } else {
+                showError('Lo sentimos, tu nombre no se encuentra en la lista de invitados.');
+            }
+        }
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'none'; // Reiniciar para volver a animar
+            
+            setTimeout(() => {
+                errorMessage.style.display = 'block';
+            }, 10);
+        }
+        
+        // Agregar efectos de hover a las imágenes
+        function setupImageEffects() {
+            const images = document.querySelectorAll('.invitation-image');
+            
+            images.forEach(img => {
+                img.addEventListener('mouseover', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                img.addEventListener('mouseout', function() {
+                    // Restaurar z-index original después de la transición
+                    setTimeout(() => {
+                        if (this.classList.contains('image-1')) {
+                            this.style.zIndex = '2';
+                        } else {
+                            this.style.zIndex = '1';
+                        }
+                    }, 500);
+                });
+            });
+        }
+        
+        // Event listeners
+        verifyBtn.addEventListener('click', verifyGuest);
+        
+        nameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyGuest();
+            }
+        });
+        
+        // Ocultar el mensaje de error cuando el usuario empieza a escribir
+        nameInput.addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+        
+        // Inicializar efectos de imagen cuando se cargue la invitación
+        window.addEventListener('load', function() {
+            setupImageEffects();
+        });
+    </script>
+</body>
+</html>
